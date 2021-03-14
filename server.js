@@ -21,7 +21,7 @@ client.query(query, (err, res) => {
 
 
 const date = (new Date()).toLocaleString("en-US")
-query = format("INSERT INTO day (id,date,activities) VALUES(3,%L, NULL)", date);
+query = format("INSERT INTO day (id,date,activities) VALUES(56,%L, NULL)", date);
 console.log(query);
 client.query(query, (err, res) => {
     if (err) {
