@@ -1,4 +1,3 @@
-const { get } = require('mongoose');
 const { Client } = require('pg');
 var pg = require('pg');
 var format = require('pg-format');
