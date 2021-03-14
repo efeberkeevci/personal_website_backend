@@ -11,7 +11,7 @@ const { credentials } = require("./credentials")
 pg.defaults.ssl = true;
 const client = new Client(credentials);
 
-client.connect();
+//client.connect();
 
 /*
 //Gets all days
