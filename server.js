@@ -2,8 +2,8 @@ const { Client } = require('pg');
 var pg = require('pg');
 var format = require('pg-format');
 
-console.log(process.env.USER,
-    process.env.HOST,
+console.log(typeof(process.env.USER),
+    typeof(process.env.HOST),
     process.env.DATABASE,
     process.env.PASSWORD,
     process.env.PORT);
