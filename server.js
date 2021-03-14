@@ -2,14 +2,18 @@ const { Client } = require('pg');
 var pg = require('pg');
 var format = require('pg-format');
 
-
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+console.log(process.env.USER,
+    process.env.HOST,
+    process.env.DATABASE,
+    process.env.PASSWORD,
+    process.env.PORT);
 const { credentials } = require("./credentials")
 pg.defaults.ssl = true;
 const client = new Client(credentials);
 
 client.connect();
 
+/*
 //Gets all days
 let query = "SELECT * FROM day;"
 client.query(query, (err, res) => {
@@ -32,3 +36,5 @@ client.query(query, (err, res) => {
     }
     console.log(res.rows);
 });
+
+*/
