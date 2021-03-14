@@ -1,6 +1,8 @@
 const { Client } = require('pg');
 var pg = require('pg');
 var format = require('pg-format');
+
+
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const { credentials } = require("./credentials")
 pg.defaults.ssl = true;
@@ -21,7 +23,7 @@ client.query(query, (err, res) => {
 
 
 const date = (new Date()).toLocaleString("en-US")
-query = format("INSERT INTO day (id,date,activities) VALUES(56,%L, NULL)", date);
+query = format("INSERT INTO day (id,date,activities) VALUES(44,%L, NULL)", date);
 console.log(query);
 client.query(query, (err, res) => {
     if (err) {
