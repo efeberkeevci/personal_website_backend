@@ -9,9 +9,8 @@
 const express = require("express");
 const app = express()
 const { getDays, getActivities, getActivityDetails, postNewDay, dbConn, initConnectiontoDB } = require("./db")
-const port = 3000
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
     initConnectiontoDB(dbConn);
     console.log(`Server listening at port ${port}`);
 })
