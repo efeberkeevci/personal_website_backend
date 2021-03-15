@@ -9,7 +9,6 @@ pg.defaults.ssl = true;
 //const connection_string = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
 
 
-
 const dbConn = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: true
@@ -25,7 +24,7 @@ function initConnectiontoDB(dbConn) {
 }
 
 function getDays(req, res) {
-    let query = "SELECT * FROM day;"
+    const query = "SELECT * FROM day;"
     dbConn.query(query, (err, result) => {
         if (err) {
             console.error(err);
@@ -39,8 +38,7 @@ function getDays(req, res) {
 
 function postNewDay(req, res) {
     const date = (new Date()).toLocaleString("en-US")
-    query = format("INSERT INTO day (id,date,activities) VALUES(%L,%L, NULL)", parseInt(Math.random() * 1000), date);
-    console.log(query);
+    const query = format("INSERT INTO day (id,date,activities) VALUES(%L,%L, NULL)", parseInt(Math.random() * 1000), date);
     dbConn.query(query, (err, res) => {
         if (err) {
             console.error(err);
@@ -53,8 +51,23 @@ function postNewDay(req, res) {
     });
 }
 
-function getActivities(req, res) {}
+function getActivities(req, res) {
+    const query = "SELECT * FROM day, activity WHERE activity.day = day.day_id; SELECT * FROM activity, tag WHERE tag.activity = tag.tag_id;"
+    dbConn.query(query, (err, res) => {
+        if (err) {
+            console.error(err);
+            res.status(400).send()
+            return;
+        }
+        console.log(res.rows);
+        res.status(200).send(res.rows);
+        return;
+    });
+}
 
-function getActivityDetails(req, res) {}
+function getActivityDetails(req, res) {
+
+
+}
 
 module.exports = { initConnectiontoDB, getDays, getActivities, getActivityDetails, postNewDay, dbConn };
