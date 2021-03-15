@@ -3,13 +3,15 @@ var pg = require('pg');
 var format = require('pg-format');
 require('dotenv').config()
 
+
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-
-const { credentials } = require("./credentials")
 pg.defaults.ssl = true;
+const connection_string = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
+const client = new Client({
+    connectionString: connection_string,
+    ssl: true
+});
 
-
-const client = new Client(credentials);
 client.connect(function(err) {
     if (err) console.log("Error at db connection: ", err);
     else {
