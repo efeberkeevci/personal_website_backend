@@ -6,9 +6,9 @@ require('dotenv').config()
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 pg.defaults.ssl = true;
-const connection_string = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
+//const connection_string = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
 const client = new Client({
-    connectionString: connection_string,
+    connectionString: process.env.DATABASE,
     ssl: true
 });
 
