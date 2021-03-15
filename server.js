@@ -17,6 +17,6 @@ app.listen(port, () => {
 })
 
 app.get("/days", getDays);
-app.get("/activities:day", getActivities());
-app.get("/details:activity_id", getActivityDetails());
-app.post("/day", postNewDay());
+app.get("/activities:day", getActivities);
+app.get("/details:activity_id", getActivityDetails);
+app.post("/day", postNewDay);
