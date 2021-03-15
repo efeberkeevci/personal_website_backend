@@ -12,7 +12,7 @@ const { getDays, getActivities, getActivityDetails, postNewDay, dbConn, initConn
 
 app.listen(process.env.PORT, () => {
     initConnectiontoDB(dbConn);
-    console.log(`Server listening at port ${port}`);
+    console.log(`Server listening at port ${process.env.PORT}`);
 })
 
 app.get("/days", getDays);
