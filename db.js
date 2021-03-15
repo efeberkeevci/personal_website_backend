@@ -26,12 +26,13 @@ function initConnectiontoDB(dbConn) {
 
 function getDays(req, res) {
     let query = "SELECT * FROM day;"
-    dbConn.query(query, (err, res) => {
+    dbConn.query(query, (err, result) => {
         if (err) {
             console.error(err);
             return;
         }
-        console.log(res.rows);
+        console.log(result.rows);
+        res.status(200).send(result.rows)
     });
 
 }
@@ -43,9 +44,12 @@ function postNewDay(req, res) {
     dbConn.query(query, (err, res) => {
         if (err) {
             console.error(err);
+            res.status(400).send()
             return;
         }
         console.log(res.rows);
+        res.status(200).send();
+        return;
     });
 }
 
