@@ -1,58 +1,3 @@
-const { Client } = require('pg');
-var pg = require('pg');
-var format = require('pg-format');
-require('dotenv').config()
-
-
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-pg.defaults.ssl = true;
-//const connection_string = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-});
-
-client.connect(function(err) {
-    if (err) console.log("Error at db connection: ", err);
-    else {
-        console.log("Connected to the database!");
-    }
-});
-
-
-function getDays() {
-    let query = "SELECT * FROM day;"
-    client.query(query, (err, res) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        console.log(res.rows);
-    });
-
-}
-
-function postNewDay() {
-    const date = (new Date()).toLocaleString("en-US")
-    query = format("INSERT INTO day (id,date,activities) VALUES(%L,%L, NULL)", parseInt(Math.random() * 1000), date);
-    console.log(query);
-    client.query(query, (err, res) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        console.log(res.rows);
-    });
-}
-
-/*
-console.log("Starting database interaction");
-getDays();
-console.log("Inserting a new day to the db");
-postNewDay();
-getDays();
-*/
-
 /*TODO:
  * With express, write endpoints to 
  * get days
@@ -60,3 +5,18 @@ getDays();
  * get detail and tags of an activity
  * insert new day with activities and details
  */
+
+const express = require("express");
+const app = express()
+const { getDays, getActivities, getActivityDetails, postNewDay, dbConn, initConnectiontoDB } = require("./db")
+const port = 3000
+
+app.listen(port, () => {
+    initConnectiontoDB(dbConn);
+    console.log(`Server listening at port ${port}`);
+})
+
+app.get("/days", getDays);
+app.get("/activities:day", getActivities());
+app.get("/details:activity_id", getActivityDetails());
+app.post("/day", postNewDay());
