@@ -12,11 +12,10 @@ const client = new Client({
     ssl: true
 });
 
-console.log(client);
 client.connect(function(err) {
     if (err) console.log("Error at db connection: ", err);
     else {
-        console.log("Connected!");
+        console.log("Connected to the database!");
     }
 });
 
@@ -53,3 +52,11 @@ console.log("Inserting a new day to the db");
 postNewDay();
 getDays();
 */
+
+/*TODO:
+ * With express, write endpoints to 
+ * get days
+ * get activities of a day and
+ * get detail and tags of an activity
+ * insert new day with activities and details
+ */
