@@ -12,12 +12,14 @@ const client = new Client({
     ssl: true
 });
 
+console.log(client);
 client.connect(function(err) {
     if (err) console.log("Error at db connection: ", err);
     else {
         console.log("Connected!");
     }
 });
+
 
 function getDays() {
     let query = "SELECT * FROM day;"
@@ -44,8 +46,10 @@ function postNewDay() {
     });
 }
 
+/*
 console.log("Starting database interaction");
 getDays();
 console.log("Inserting a new day to the db");
 postNewDay();
 getDays();
+*/
