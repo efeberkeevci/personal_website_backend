@@ -1,14 +1,9 @@
-/*TODO:
- * With express, write endpoints to 
- * get days
- * get activities of a day and
- * get detail and tags of an activity
- * insert new day with activities and details
- */
-
 const express = require("express");
+const { getDays, getActivities, getTags, postNewDay, postNewActivity, postNewTag, dbConn, initConnectiontoDB } = require("./db")
+
 const app = express()
-const { getDays, getActivities, getActivityDetails, postNewDay, dbConn, initConnectiontoDB } = require("./db")
+app.use(express.urlencoded());
+app.use(express.json());
 
 app.listen(process.env.PORT, () => {
     initConnectiontoDB(dbConn);
@@ -16,6 +11,8 @@ app.listen(process.env.PORT, () => {
 })
 
 app.get("/days", getDays);
-app.get("/activities:day", getActivities);
-app.get("/details:activity_id", getActivityDetails);
+app.get("/activities/:day", getActivities);
+app.get("/tags/:activity_id", getTags);
 app.post("/day", postNewDay);
+app.post("/activity", postNewActivity);
+app.post("/tag", postNewTag);
