@@ -30,6 +30,19 @@ function getDays(req, res) {
 
 }
 
+function getCurrentMonthDays(req, res) {
+    const month = req.body.month;
+    const query = format("SELECT * FROM day WHERE day.month = %L", month);
+    dbConn.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(result.rows);
+        res.status(200).send(result.rows)
+    });
+}
+
 function postNewDay(req, res) {
     const activities = req.body.activities;
     const date = (new Date()).toLocaleString("en-US");
@@ -138,7 +151,7 @@ function getTags(req, res) {
     });
 
 }
-module.exports = { initConnectiontoDB, getDays, getActivities, getTags, postNewDay, postNewActivity, postNewTag, dbConn };
+module.exports = { initConnectiontoDB, getDays, getCurrentMonthDays, getActivities, getTags, postNewDay, postNewActivity, postNewTag, dbConn };
 
 /*
 
