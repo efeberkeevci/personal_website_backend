@@ -31,8 +31,9 @@ function getDays(req, res) {
 }
 
 function getCurrentMonthDays(req, res) {
-    const month = req.body.month;
+    const month = req.param("month");
     const query = format("SELECT * FROM day WHERE day.month = %L", month);
+    console.log(query);
     dbConn.query(query, (err, result) => {
         if (err) {
             console.error(err);
