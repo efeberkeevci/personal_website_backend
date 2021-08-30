@@ -152,6 +152,8 @@ function getTags(req, res) {
     });
 
 }
+
+
 module.exports = { initConnectiontoDB, getDays, getCurrentMonthDays, getActivities, getTags, postNewDay, postNewActivity, postNewTag, dbConn };
 
 /*
